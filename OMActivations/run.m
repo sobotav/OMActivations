@@ -4,10 +4,9 @@ close all;
 
 %add path to the OMAFunctions
 addpath('functions')
-addpath('showWindow')
 
 % sample data
-path = 'path_to_RSH_file';
+path = '';
 name = 'file.rsh';
 
 %% Data load
