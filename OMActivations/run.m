@@ -5,23 +5,27 @@ close all;
 %add path to the OMAFunctions
 addpath('functions')
 
-% sample data
-path = '';
-name = 'file.rsh';
-
 %% Data load
+
+% Load RHS file
+%{
+path = 'data';              % path to the file
+name = 'sample_file.rsh';   % name of the RSH file
 
 fprintf('Loading data:\n');
 
 [dataTemp, dataInfo]    = readOMAData(path, name);  % load data
-dataOMA                 = dataTemp(:,1:1e4);       	% select just the image data
-Nframes                 = size(dataOMA,1);          % total number of pixels
-dataOMA                 = -dataOMA;                	% inversion of the signal     
+dataOMA                 = -dataTemp(:,1:1e4);       % select just the image data   
 
 fprintf('\nDone!\n');
+%}
 
-% save data
-%save('data_OMA.mat', 'dataOMA');
+% Load MAT data
+%
+path = 'data';
+name = 'sample_data_AF.mat';
+load(fullfile(path,name));
+%}
 
 %% Data smoothening
 
@@ -38,7 +42,7 @@ fprintf('\nDone!\n');
 
 % Parameteres
 upstrokeDuration   = 20;                   % upstroke duration (for the template)
-fs                  = dataInfo.f_sampl;     % sampling frequency
+fs                 = dataInfo.f_sampl;     % sampling frequency
 upperLimit         = 1;                    % upper value of the template
 lowerLimit         = -1;                   % lower value of the template
 
@@ -66,7 +70,7 @@ fprintf('\nSpatiotemporal filtering...');
 kernel = create3DKernel(k,t);   
 
 % perform spatiotemporal filtering
-dataUpstrokeStFilt = stFilter(dataUpstroke, Nframes, th, kernel);  	
+dataUpstrokeStFilt = stFilter(dataUpstroke, dataInfo.N_frames, th, kernel);  	
 
 fprintf('\nDone!\n');
 
