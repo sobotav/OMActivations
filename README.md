@@ -18,7 +18,11 @@ path = '';
 name = 'file.mat';
 load(fullfile(path,name));
 ```
-The scripts have been optimized for processing optical mapping files with 100x100 pixels, stored as two-dimensional arrays with each row representing a time frame and each column representing a pixel (for example 2048x10000). 
+The scripts have been optimized for processing optical mapping files with 100x100 pixels, stored as two-dimensional arrays with each row representing a time frame and each column representing a pixel (for example 1024x10000). 
+
+If the script is executed well, you should see a graph like this:
+
+![Sample graph](https://github.com/sobotav/OMActivations/tree/main/OMActivations/data/graph_sample_data_AF.png)
 
 ## Compatibility with MATLAB versions
 The scripts should be compatible with MATLAB 2016a or later. Previous MATLAB releases have not been tested. The latest release has been tested on MATLAB 2021a. 
